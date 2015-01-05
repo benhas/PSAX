@@ -14,7 +14,7 @@
 
 #>
 
-function Create-LocalAccount {
+function Create-LocalUser {
 	[CmdletBinding()]
 
 	param(

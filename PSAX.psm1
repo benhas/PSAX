@@ -1,3 +1,10 @@
-. $PSScriptRoot\Functions\Set-Path.ps1
-. $PSScriptRoot\Functions\Set-PathAccessRule.ps1
-. $PSScriptRoot\Functions\Create-LocalAccount.ps1
+Import-Module AWSPowerShell
+
+$moduleRoot = Split-Path -Path $MyInvocation.MyCommand.Path
+
+"$moduleRoot\Functions\*.ps1" |
+Resolve-Path |
+Where-Object { -not ($_.ProviderPath.Contains(".Tests.")) } |
+ForEach-Object { . $_.ProviderPath }
+
+Export-ModuleMember Set-Path, Set-PathAccessRule, Create-LocalAccount
